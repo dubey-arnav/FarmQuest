@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmGame - Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>🌱 FarmGame</h1>
+    <button id="logoutBtn" class="btn small">Logout</button>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Welcome <span id="userName">Farmer</span>!</h2>
+      <p>Here are your stats:</p>
+      <ul>
+        <li>Points: <span id="points">0</span></li>
+        <li>Badges: <span id="badges">None yet</span></li>
+      </ul>
+      <a class="btn" href="game.html">Play Game</a>
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
