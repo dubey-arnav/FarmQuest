@@ -1,11 +1,19 @@
-// Replace with your Firebase project config
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_MSG_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDVsFW1PaDDz9ytQQ1TvojlPgiHP1AqBwg",
+  authDomain: "farmquest-a5343.firebaseapp.com",
+  projectId: "farmquest-a5343",
+  storageBucket: "farmquest-a5343.firebasestorage.app",
+  messagingSenderId: "423474578623",
+  appId: "1:423474578623:web:09754402bdec15cc86320a",
+  measurementId: "G-20J3WMNJNV"
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+export { app, auth, db };

@@ -2,31 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FarmGame - Dashboard</title>
+  <title>Dashboard</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header>
-    <h1>🌱 FarmGame</h1>
-    <button id="logoutBtn" class="btn small">Logout</button>
+    <h1>Dashboard</h1>
+    <button id="logoutBtn">Logout</button>
   </header>
 
   <main>
-    <section class="card">
-      <h2>Welcome <span id="userName">Farmer</span>!</h2>
-      <p>Here are your stats:</p>
-      <ul>
-        <li>Points: <span id="points">0</span></li>
-        <li>Badges: <span id="badges">None yet</span></li>
-      </ul>
-      <a class="btn" href="game.html">Play Game</a>
-    </section>
+    <p id="usernameDisplay"></p>
+    <p>Points: <span id="points"></span></p>
+    <p>Badges: <span id="badges"></span></p>
+    <a href="game.html">Play Game</a>
   </main>
 
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
-  <script src="js/firebase-config.js"></script>
-  <script src="js/dashboard.js"></script>
+  <script type="module">
+    import { auth, db } from './js/firebase-config.js';
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { protectPage, logoutAndRedirect } from './js/authGuard.js';
+
+    protectPage(); // protect dashboard
+
+    document.getElementById('logoutBtn').addEventListener('click', logoutAndRedirect);
+
+    // Display user info
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userSnap = await getDoc(doc(db, 'users', user.uid));
+        if (userSnap.exists()) {
+          const data = userSnap.data();
+          document.getElementById('usernameDisplay').textContent = data.username;
+          document.getElementById('points').textContent = data.points ?? 0;
+          document.getElementById('badges').textContent = (data.badges || []).join(', ') || 'None';
+        }
+      }
+    });
+  </script>
 </body>
 </html>

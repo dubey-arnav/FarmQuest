@@ -2,26 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FarmGame - Login</title>
+  <title>Login / Sign-up</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header><h1>🌱 FarmGame</h1></header>
+  <h1>Sign in with Google</h1>
+  <button id="googleLoginBtn">Login with Google</button>
 
-  <main class="form-card">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <input type="email" id="loginEmail" placeholder="Email" required>
-      <input type="password" id="loginPassword" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
-    <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
-  </main>
+  <script type="module">
+    import { auth, db } from './js/firebase-config.js';
+    import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
-  <script src="js/firebase-config.js"></script>
-  <script src="js/auth.js"></script>
+    const provider = new GoogleAuthProvider();
+
+    // If user is already logged in, redirect immediately
+    onAuthStateChanged(auth, (user) => {
+      if (user) window.location.href = 'dashboard.html';
+    });
+
+    document.getElementById('googleLoginBtn').addEventListener('click', async () => {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        // Create Firestore user document if it doesn't exist
+        const userRef = doc(db, 'users', user.uid);
+        await setDoc(userRef, {
+          username: user.displayName,
+          email: user.email,
+          createdAt: serverTimestamp(),
+          points: 0,
+          badges: []
+        }, { merge: true });
+
+        // Redirect to dashboard after login
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        alert(err.message);
+        console.error(err);
+      }
+    });
+  </script>
 </body>
 </html>
