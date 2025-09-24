@@ -2,47 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login / Sign-up</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmQuest - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Page-specific: Login section layout */
+    .login-container {
+      max-width: 400px;
+      margin: 8rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+    .login-container h2 {
+      color: #2e7d32;
+      margin-bottom: 2rem;
+    }
+    .google-btn {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    .google-btn:hover {
+      background-color: #357ae8;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-  <h1>Sign in with Google</h1>
-  <button id="googleLoginBtn">Login with Google</button>
 
-  <script type="module">
-    import { auth, db } from './js/firebase-config.js';
-    import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  <header>
+    <h2>FarmQuest</h2>
+  </header>
 
-    const provider = new GoogleAuthProvider();
+  <section class="login-container">
+    <h2>Sign in with Google</h2>
+    <button class="google-btn" onclick="location.href='dashboard.html'">Sign in with Google</button>
+  </section>
 
-    // If user is already logged in, redirect immediately
-    onAuthStateChanged(auth, (user) => {
-      if (user) window.location.href = 'dashboard.html';
-    });
+  <footer>
+    <p>&copy; 2025 FarmQuest. All rights reserved.</p>
+  </footer>
 
-    document.getElementById('googleLoginBtn').addEventListener('click', async () => {
-      try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-
-        // Create Firestore user document if it doesn't exist
-        const userRef = doc(db, 'users', user.uid);
-        await setDoc(userRef, {
-          username: user.displayName,
-          email: user.email,
-          createdAt: serverTimestamp(),
-          points: 0,
-          badges: []
-        }, { merge: true });
-
-        // Redirect to dashboard after login
-        window.location.href = 'dashboard.html';
-      } catch (err) {
-        alert(err.message);
-        console.error(err);
-      }
-    });
-  </script>
 </body>
 </html>

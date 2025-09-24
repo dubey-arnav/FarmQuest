@@ -1,75 +1,151 @@
-:root {
-  --primary: #2e7d32; /* sustainable green */
-  --light: #f5f9f5;
-  --dark: #1b5e20;
+/* ============================
+   Common Styles for All Pages
+=============================== */
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+  font-family: 'Poppins', sans-serif; 
 }
 
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: var(--light);
-  color: var(--dark);
+body { 
+  background-color: #f2f8f2; 
+  color: #333; 
+  overflow-x: hidden; 
+  line-height: 1.6;
 }
 
+/* Header */
 header {
-  background: var(--primary);
+  background-color: #2e7d32;
   color: white;
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  animation: slideDown 1s ease;
 }
-
+header h2 { font-weight: 600; font-size: 1.8rem; }
 nav a {
   color: white;
-  margin: 0 0.5rem;
+  margin-left: 1.5rem;
   text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
 }
+nav a:hover { color: #ffeb3b; }
 
-main {
-  padding: 2rem;
-}
-
-.hero {
-  text-align: center;
-  padding: 3rem;
-  background: white;
-  border-radius: 10px;
-}
-
-.card, .form-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 400px;
-  margin: auto;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-input, button {
-  width: 100%;
-  padding: 0.8rem;
-  margin: 0.5rem 0;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-button, .btn {
-  background: var(--primary);
+/* Sign In Panel */
+.signin-panel a {
   color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid white;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+.signin-panel a:hover {
+  background-color: white;
+  color: #2e7d32;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.8rem 2rem;
+  margin: 0.5rem;
+  background-color: #ffb74d;
+  color: #333;
   border: none;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: transform 0.3s, background-color 0.3s;
+}
+.btn:hover {
+  background-color: #ffa726;
+  transform: scale(1.05);
 }
 
-button:hover, .btn:hover {
-  background: var(--dark);
-}
-
-footer {
+/* Cards */
+.feature-card, .step {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
   text-align: center;
-  padding: 1rem;
-  background: var(--primary);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.feature-card:hover, .step:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+.feature-card h3, .step h3 { color: #2e7d32; margin-bottom: 1rem; }
+.feature-card p, .step p { color: #555; }
+
+/* Hero Section */
+.hero {
   color: white;
+  text-align: center;
+  padding: 6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  animation: fadeIn 1.5s ease;
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  animation: slideUp 1s ease;
+}
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  animation: slideUp 1s ease 0.3s;
+}
+
+/* Features Section */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 4rem 2rem;
+  animation: fadeIn 1.2s ease;
+}
+
+/* How It Works Section */
+.how-it-works {
+  background-color: #e8f5e9;
+  padding: 4rem 2rem;
+  text-align: center;
+  animation: fadeIn 1.2s ease;
+}
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
   margin-top: 2rem;
 }
+
+/* Footer */
+footer {
+  background-color: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
