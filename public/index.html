@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FarmQuest - Home</title>
+  <title>FarmQuest - Gamified Sustainable Farming</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* ============================
-       General Styles
-    =========================== */
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-    body { background-color: #f2f8f2; color: #333; overflow-x: hidden; line-height: 1.6; }
+    body { background-color: #f2f8f2; color: #333; overflow-x: hidden; }
 
+    /* Header */
     header {
       background-color: #2e7d32;
       color: white;
@@ -26,16 +24,14 @@
       animation: slideDown 1s ease;
     }
     header h2 { font-weight: 600; font-size: 1.8rem; }
-    .signin-panel a {
+    nav a {
       color: white;
-      font-weight: 600;
+      margin-left: 1.5rem;
       text-decoration: none;
-      border: 2px solid white;
-      padding: 0.4rem 1rem;
-      border-radius: 6px;
-      transition: all 0.3s;
+      font-weight: 600;
+      transition: color 0.3s;
     }
-    .signin-panel a:hover { background-color: white; color: #2e7d32; }
+    nav a:hover { color: #ffeb3b; }
 
     /* Hero Section */
     .hero {
@@ -51,11 +47,19 @@
       min-height: 90vh;
       animation: fadeIn 1.5s ease;
     }
-    .hero h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 5px rgba(0,0,0,0.5); animation: slideUp 1s ease; }
-    .hero p { font-size: 1.2rem; margin-bottom: 2rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); animation: slideUp 1s ease 0.3s; }
-
-    /* Buttons */
-    .btn {
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      animation: slideUp 1s ease;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      animation: slideUp 1s ease 0.3s;
+    }
+    .hero .btn {
       padding: 0.8rem 2rem;
       margin: 0.5rem;
       background-color: #ffb74d;
@@ -66,9 +70,12 @@
       cursor: pointer;
       transition: transform 0.3s, background-color 0.3s;
     }
-    .btn:hover { background-color: #ffa726; transform: scale(1.05); }
+    .hero .btn:hover {
+      background-color: #ffa726;
+      transform: scale(1.05);
+    }
 
-    /* Features Section */
+    /* Features */
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -84,32 +91,69 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .feature-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
-    .feature-card h3 { color: #2e7d32; margin-bottom: 1rem; }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    .feature-card h3 { margin-bottom: 1rem; color: #2e7d32; }
     .feature-card p { color: #555; }
 
     /* How It Works */
-    .how-it-works { background-color: #e8f5e9; padding: 4rem 2rem; text-align: center; animation: fadeIn 1.2s ease; }
-    .steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 2rem; }
+    .how-it-works {
+      background-color: #e8f5e9;
+      padding: 4rem 2rem;
+      text-align: center;
+      animation: fadeIn 1.2s ease;
+    }
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
     .step {
       background: white;
-      border-radius: 12px;
       padding: 2rem;
-      text-align: center;
+      border-radius: 12px;
+      flex: 1 1 200px;
+      max-width: 250px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .step:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+    .step:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
     .step h3 { color: #2e7d32; margin-bottom: 1rem; }
-    .step p { color: #555; }
 
     /* Footer */
-    footer { background-color: #2e7d32; color: white; text-align: center; padding: 2rem; }
+    footer {
+      background-color: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
 
     /* Animations */
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Sign In panel (top right) */
+    .signin-panel a {
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid white;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+    .signin-panel a:hover {
+      background-color: white;
+      color: #2e7d32;
+    }
   </style>
 </head>
 <body>
