@@ -3,27 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FarmGame - Sustainable Farming</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>FarmQuest - Gamified Sustainable Farming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background-color: #f2f8f2; color: #333; overflow-x: hidden; }
+
+    /* Header */
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      animation: slideDown 1s ease;
+    }
+    header h2 { font-weight: 600; font-size: 1.8rem; }
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #ffeb3b; }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+                  url('https://images.unsplash.com/photo-1601758123927-9f44ef64fc84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTI3fDB8MHxzZWFyY2h8Mnx8ZmFybXxlbnwwfHwwfHx8MA&ixlib=rb-4.0.3&q=80&w=1080') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 6rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 90vh;
+      animation: fadeIn 1.5s ease;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      animation: slideUp 1s ease;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      animation: slideUp 1s ease 0.3s;
+    }
+    .hero .btn {
+      padding: 0.8rem 2rem;
+      margin: 0.5rem;
+      background-color: #ffb74d;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    .hero .btn:hover {
+      background-color: #ffa726;
+      transform: scale(1.05);
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 4rem 2rem;
+      animation: fadeIn 1.2s ease;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    .feature-card h3 { margin-bottom: 1rem; color: #2e7d32; }
+    .feature-card p { color: #555; }
+
+    /* How It Works */
+    .how-it-works {
+      background-color: #e8f5e9;
+      padding: 4rem 2rem;
+      text-align: center;
+      animation: fadeIn 1.2s ease;
+    }
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .step {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      flex: 1 1 200px;
+      max-width: 250px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .step:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    .step h3 { color: #2e7d32; margin-bottom: 1rem; }
+
+    /* Footer */
+    footer {
+      background-color: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Sign In panel (top right) */
+    .signin-panel a {
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid white;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+    .signin-panel a:hover {
+      background-color: white;
+      color: #2e7d32;
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <h1>🌱 FarmGame</h1>
-    <nav>
-       <a href="login.html">Login / Sign-up with Google</a>
-    </nav>
+    <h2>FarmQuest</h2>
+    <div class="signin-panel">
+      <a href="login.html">Sign In</a>
+    </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <h2>Play, Learn & Grow</h2>
-      <p>Gamified platform to promote sustainable farming practices.</p>
-      <a class="btn" href="login.html">Get Started</a>
-    </section>
-  </main>
+  <section class="hero">
+    <h1>Learn & Play: Grow a Sustainable Farm!</h1>
+    <p>Complete challenges, earn points, and promote sustainable farming.</p>
+    <button class="btn" onclick="location.href='login.html'">Get Started</button>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <h3>Gamified Learning</h3>
+      <p>Learn about sustainable farming while completing fun challenges.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Track Your Progress</h3>
+      <p>Mark tasks completed, earn badges, and see your growth over time.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Sustainable Tips</h3>
+      <p>Learn environmentally friendly farming practices at each step.</p>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>1. Sign Up</h3>
+        <p>Create your account using Google and start your farming journey.</p>
+      </div>
+      <div class="step">
+        <h3>2. Complete Challenges</h3>
+        <p>Take on farming challenges and mark them as done to earn points.</p>
+      </div>
+      <div class="step">
+        <h3>3. Earn Rewards & Badges</h3>
+        <p>Get recognition for your progress and improve your skills.</p>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <p>© 2025 FarmGame Hackathon Project</p>
+    <p>&copy; 2025 FarmQuest. All rights reserved.</p>
   </footer>
+
 </body>
 </html>
