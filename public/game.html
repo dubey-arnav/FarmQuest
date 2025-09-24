@@ -55,17 +55,18 @@
 
   <!-- Unity Loader Scripts -->
   <script>
-    const buildUrl = "game/Build";
-    const loaderUrl = buildUrl + "/game.loader.js";
-    const config = {
-      dataUrl: buildUrl + "/game.data.unityweb",
-      frameworkUrl: buildUrl + "/game.framework.js.unityweb",
-      codeUrl: buildUrl + "/game.wasm.unityweb",
-      streamingAssetsUrl: "game/StreamingAssets",
-      companyName: "FarmQuest",
-      productName: "FarmQuest Game",
-      productVersion: "1.0",
-    };
+    const buildUrl = "game/Build"; // path to your Build folder
+const loaderUrl = buildUrl + "/FarmQuest.loader.js"; // exact filename
+const config = {
+  dataUrl: buildUrl + "/FarmQuest.data.br",          // exact filename
+  frameworkUrl: buildUrl + "/FarmQuest.framework.js.br",
+  codeUrl: buildUrl + "/FarmQuest.wasm.br",
+  streamingAssetsUrl: "game/StreamingAssets",
+  companyName: "FarmQuest",
+  productName: "FarmQuest Game",
+  productVersion: "1.0",
+};
+
 
     const container = document.querySelector("#unityContainer");
     const script = document.createElement("script");
