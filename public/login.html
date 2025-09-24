@@ -5,9 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FarmQuest - Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Page-specific: Login section layout */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background-color: #f2f8f2; color: #333; overflow-x: hidden; line-height: 1.6; }
+
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    header h2 { font-weight: 600; font-size: 1.8rem; }
+
     .login-container {
       max-width: 400px;
       margin: 8rem auto;
@@ -18,10 +28,23 @@
       text-align: center;
       animation: fadeIn 1s ease;
     }
-    .login-container h2 {
-      color: #2e7d32;
-      margin-bottom: 2rem;
+    .login-container h2 { color: #2e7d32; margin-bottom: 2rem; }
+
+    .google-btn {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
     }
+    .google-btn:hover { background-color: #357ae8; transform: scale(1.05); }
+
+    footer { background-color: #2e7d32; color: white; text-align: center; padding: 2rem; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   </style>
 </head>
 <body>
