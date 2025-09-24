@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FarmQuest - Game</title>
+  <title>FarmQuest Game</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Poppins', sans-serif; background-color:#f2f8f2; }
+    /* General page styling */
+    body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Poppins', sans-serif; background-color: #f2f8f2; display: flex; flex-direction: column; }
     header {
       background-color: #2e7d32;
       color: white;
@@ -28,13 +29,34 @@
       transition: transform 0.3s;
     }
     .logout-btn:hover { transform: scale(1.05); }
+
+    /* Unity container */
     #gameContainer {
-      width: 100%;
-      height: calc(100vh - 70px); /* fill the rest of the screen */
+      flex: 1;
+      background-color: #000;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color:#000;
+      position: relative;
+    }
+
+    /* Loading bar */
+    #loadingBarContainer {
+      width: 50%;
+      height: 20px;
+      background: #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    #loadingBar {
+      height: 100%;
+      width: 0%;
+      background: #ffb74d;
+      border-radius: 10px;
+      transition: width 0.2s;
     }
   </style>
 
@@ -50,32 +72,37 @@
   </header>
 
   <div id="gameContainer">
-    <div id="unityContainer"></div>
+    <div id="loadingBarContainer">
+      <div id="loadingBar"></div>
+    </div>
   </div>
 
   <!-- Unity Loader Scripts -->
   <script>
-    const buildUrl = "game/Build"; // path to your Build folder
-const loaderUrl = buildUrl + "/FarmQuest.loader.js"; // exact filename
-const config = {
-  dataUrl: buildUrl + "/FarmQuest.data.br",          // exact filename
-  frameworkUrl: buildUrl + "/FarmQuest.framework.js.br",
-  codeUrl: buildUrl + "/FarmQuest.wasm.br",
-  streamingAssetsUrl: "game/StreamingAssets",
-  companyName: "FarmQuest",
-  productName: "FarmQuest Game",
-  productVersion: "1.0",
-};
+    const buildUrl = "game/Build"; // Path to your Build folder
+    const loaderUrl = buildUrl + "/FarmQuest.loader.js"; // Capitalization matches your build
+    const config = {
+      dataUrl: buildUrl + "/FarmQuest.data.br",
+      frameworkUrl: buildUrl + "/FarmQuest.framework.js.br",
+      codeUrl: buildUrl + "/FarmQuest.wasm.br",
+      streamingAssetsUrl: "game/StreamingAssets",
+      companyName: "FarmQuest",
+      productName: "FarmQuest Game",
+      productVersion: "1.0",
+    };
 
+    const container = document.querySelector("#gameContainer");
+    const progressBar = document.getElementById("loadingBar");
 
-    const container = document.querySelector("#unityContainer");
     const script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
       createUnityInstance(container, config, (progress) => {
-        console.log(progress); // optional: loading progress
+        progressBar.style.width = (progress * 100) + "%";
       }).then((unityInstance) => {
         console.log("Unity loaded!");
+        // Remove loading bar once done
+        document.getElementById("loadingBarContainer").style.display = "none";
       }).catch((message) => {
         alert(message);
       });
@@ -83,8 +110,8 @@ const config = {
     document.body.appendChild(script);
   </script>
 
+  <!-- Firebase Auth Script -->
   <script>
-    // Firebase Auth
     const firebaseConfig = {
   apiKey: "AIzaSyDVsFW1PaDDz9ytQQ1TvojlPgiHP1AqBwg",
   authDomain: "farmquest-a5343.firebaseapp.com",
