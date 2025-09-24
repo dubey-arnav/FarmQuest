@@ -1,3 +1,9 @@
+// Patch for browsers that do not have getContextSafariWebGL2Fixed (Chrome, Firefox)
+if (typeof HTMLCanvasElement.prototype.getContextSafariWebGL2Fixed !== "function") {
+    HTMLCanvasElement.prototype.getContextSafariWebGL2Fixed = function(type, attrs) {
+        return this.getContext(type, attrs);
+    };
+}
 
 var unityFramework = (() => {
   var _scriptDir = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : undefined;
